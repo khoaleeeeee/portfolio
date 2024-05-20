@@ -34,17 +34,15 @@ jobs:
         with:
           node-version: 18.13.0
 
-      - name: Create .env file
-        run: |
-          echo VITE_EMAILJS_PUBLIC_KEY=${{ secrets.VITE_EMAILJS_PUBLIC_KEY }} >> .env
-          echo VITE_EMAILJS_SERVICE_ID=${{ secrets.VITE_EMAILJS_SERVICE_ID }} >> .env
-          echo VITE_EMAILJS_TEMPLATE_ID=${{ secrets.VITE_EMAILJS_TEMPLATE_ID }} >> .env
-
       - name: Install dependencies
         run: npm install
 
       - name: Build Svelte site
         run: npm run build
+        env:
+          VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }} 
+          VITE_EMAILJS_SERVICE_ID: ${{ secrets.VITE_EMAILJS_SERVICE_ID }} 
+          VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_TEMPLATE_ID }} 
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
