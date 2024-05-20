@@ -14,6 +14,7 @@ const send = async (params) => {
     );
   } catch (err) {
     if (err instanceof EmailJSResponseStatus) {
+      console.error(err);
       throw new Error(
         `${err.status} - ${err.text}`,
       );
