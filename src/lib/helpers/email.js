@@ -5,13 +5,6 @@ const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 
 const send = async (params) => {
-  console.log('Sending email...', {
-    serviceId,
-    templateId,
-    params,
-    publicKey,
-  }
-  );
   try {
     await emailjs.send(
       serviceId,
@@ -21,7 +14,6 @@ const send = async (params) => {
     );
   } catch (err) {
     if (err instanceof EmailJSResponseStatus) {
-      console.error(err);
       throw new Error(
         `${err.status} - ${err.text}`,
       );
